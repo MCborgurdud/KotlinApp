@@ -7,4 +7,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:label="HelloApp"
         android:icon="@mipmap/ic_launcher"
 
-and
+android:roundicon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    
+android:theme="@style/Theme">
