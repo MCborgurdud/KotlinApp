@@ -15,6 +15,11 @@ android {
         versionName = "1.0"
     }
 
+    // Add this block to enable View Binding
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -36,7 +41,11 @@ android {
 }
 
 dependencies {
+    // Standard library dependencies
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
+    
+    // Add the RecyclerView dependency
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 }
