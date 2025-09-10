@@ -17,15 +17,14 @@ android {
 
     buildTypes {
         release {
-            MinifyEnabled = false
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
-    
-    // Add the Java compiler options and JVM toolchain here
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
