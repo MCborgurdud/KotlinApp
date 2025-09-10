@@ -1,5 +1,6 @@
 package com.example.notes
 
+import com.example.notes.NoteAdapter
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
