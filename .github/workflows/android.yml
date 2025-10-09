@@ -2,11 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches:
-      - main
-      - 'release/**'
-  release:
-    types: [published]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -23,21 +19,37 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Cache Gradle packages
+      - name: Cache Gradle dependencies
         uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          restore-keys: ${{ runner.os }}-gradle-
 
-      - name: Build APK with Gradle Wrapper
-        run: ./gradlew assembleRelease --no-daemon
+      - name: Install Gradle if no Wrapper
+        if: "!exists('./gradlew')"
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.4
+
+      - name: Build APK
+        run: |
+          if [ -f "./gradlew" ]; then
+            chmod +x ./gradlew
+            ./gradlew assembleRelease --no-daemon
+          else
+            gradle assembleRelease --no-daemon
+          fi
 
       - name: Run Unit Tests
-        run: ./gradlew test --no-daemon
+        run: |
+          if [ -f "./gradlew" ]; then
+            ./gradlew test --no-daemon
+          else
+            gradle test --no-daemon
+          fi
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
