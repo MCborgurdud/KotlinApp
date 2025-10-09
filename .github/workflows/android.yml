@@ -29,10 +29,15 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Install Gradle if no Wrapper
-        if: "!exists('./gradlew')"
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: 8.4
+        run: |
+          if [ ! -f "./gradlew" ]; then
+            echo "Gradle Wrapper not found, installing Gradle 8.4"
+            curl -s https://services.gradle.org/distributions/gradle-8.4-bin.zip -o gradle.zip
+            unzip -q gradle.zip -d gradle
+            echo "::add-path::$(pwd)/gradle/gradle-8.4/bin"
+          else
+            echo "Gradle Wrapper found, skipping Gradle install"
+          fi
 
       - name: Build APK
         run: |
