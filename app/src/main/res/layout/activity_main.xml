@@ -1,31 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/spinner_versions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/inputNote"
+        android:id="@+id/et_max_players"
+        android:hint="Max Players (default 10)"
+        android:inputType="number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter a new note"
-        android:inputType="text" />
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_server_port"
+        android:hint="Server Port (default 25565)"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/btn_download"
+        android:text="Download Selected Version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Note" />
+        android:layout_marginTop="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <Button
+        android:id="@+id/btn_start"
+        android:text="Start Server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:enabled="false" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:text="Stop Server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:enabled="false" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="16dp" />
+        android:background="#000000"
+        android:padding="8dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tv_console"
+            android:textColor="#00FF00"
+            android:textSize="12sp"
+            android:typeface="monospace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
 
 </LinearLayout>
